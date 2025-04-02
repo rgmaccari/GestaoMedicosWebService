@@ -8,6 +8,8 @@ public class Medico {
     private String crm;
     private Especialidade especialidade;
     private Endereco endereco;
+
+    //teste
 }
 
 /**
