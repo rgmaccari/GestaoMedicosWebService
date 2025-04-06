@@ -1,7 +1,6 @@
 package services;
 
 import Model.Medico;
-import repositories.MedicoRepository;
 
 public class MedicoService {
  private MedicoRepository medicoRepository;
