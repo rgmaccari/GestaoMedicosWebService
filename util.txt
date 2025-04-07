@@ -1,0 +1,67 @@
+Classe Domain:
+- Representar a entidade;
+- Possuir construtores (padrão e com DTO);
+- Possuir getters e setters.
+
+
+DTO
+- Data Transfer Object;
+- Evita expor a entidade;
+- Cria um objeto que é usado no método inserir do Service e na Interface.
+
+
+Exceptions:
+- Exceção personalizada para ser usada em serviços web;
+- Pelo motivo acima, possui uma anotação: @WebFault
+- Vai ser utilizada apenas no Service e na Interface;
+
+
+Infraestrutura (Connection Factory):
+- Cria a conexão com o banco de dados;
+- Usado exclusivamente no Repository;
+
+
+Repository:
+- Implementa o CRUD no banco de dados;
+- Se aproveita da Connection Factory;
+- Trabalha diretamente com o objeto;
+- É a ponte entre o banco de dados e o Service;
+
+Service:
+- Lógica de negócios;
+- Realiza as validações antes de persistir no banco de dados;
+- É o intermediador entre a Interface e o Repository;
+
+Interface:
+- Necessita de uma anotação WebService na declaração da classe.
+- Necessita de uma anotação WebMethod na declaração dos métodos.
+- Define o Web Service para gerenciar objetos;
+- Ponto de entrada entre o WebService e o as operações com o objeto;
+
+Implements:
+- Necessita de uma anotação WebService.
+- Porta de entrada do serviço;
+- Converte um DTO em um Objeto;
+- Aplica os métodos na interface para que ela direcione ao Service.
+
+
+
+
+Fluxo completo:
+1) Entrada (SOAP -> Implements);
+2) Transformação de um DTO em um objeto (Implements -> Interface);
+3) Aplicação das validações (Interface -> Service)
+4) Direcionamento do objeto ao Service (Service -> Repository);
+5) Persistência no banco de dados (Repository -> ConnectionFactory);
+5) Retorno.
+
+
+Anotações principais:
+@WebFault: utilizada em BusinessException para
+
+@WebService: utilizada em MedicoWS (Interface) para
+
+@WebMethod: utilizada em MedicoWS (Interface) para
+
+@WebService: utilizada em MedicoWSImp (Interface) para
+

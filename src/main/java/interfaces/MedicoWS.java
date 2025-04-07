@@ -17,10 +17,10 @@ public interface MedicoWS {
     Medico update(Medico medico) throws BusinessException;
 
     @WebMethod
-    Medico delete(Integer id) throws BusinessException;
+    void delete(Integer id) throws BusinessException;
 
     @WebMethod
-    Medico getById(Integer id) throws BusinessException;
+    Medico findById(Integer id) throws BusinessException;
 
     @WebMethod
     List<Medico> getAll() throws BusinessException;

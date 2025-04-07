@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GestaoMedicos:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/GestaoMedicos_war</output-path>
+    <root id="archive" name="GestaoMedicos_war.war">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/GestaoMedicos-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="artifact" artifact-name="GestaoMedicos:war exploded" />
+    </root>
+  </artifact>
+</component>

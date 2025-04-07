@@ -11,7 +11,7 @@ import java.util.List;
 public class MedicoService {
     private MedicoRepository medicoRepository;
 
-    public Medico inserir(Medico medico) throws SQLException, NamingException, BusinessException {
+    public Medico insert(Medico medico) throws BusinessException {
         if(medico.getNome() == null || medico.getNome().isEmpty() ||
             medico.getEmail() == null || medico.getEmail().isEmpty() ||
             medico.getTelefone() == null || medico.getTelefone().isEmpty() ||
@@ -39,7 +39,7 @@ public class MedicoService {
 
     }
 
-    public Medico atualizarMedico(Medico medico) throws SQLException, NamingException, BusinessException {
+    public Medico update(Medico medico) throws BusinessException {
         if(medico.getId() == null){
             throw new BusinessException("O id do médico é obrigatório.");
         }
@@ -82,7 +82,7 @@ public class MedicoService {
         }
     }
 
-    public Medico findById(Integer id) throws BusinessException, NamingException{
+    public Medico findById(Integer id) throws BusinessException{
         if(id == null){
             throw new BusinessException("O id não pode ser nulo.");
         }
