@@ -1,8 +1,7 @@
 package dto;
 
-import Model.Endereco;
-import Model.Especialidade;
-import Model.Paciente;
+import model.Endereco;
+import model.Especialidade;
 
 public class DadosCadastroMedico {
     private String nome;
