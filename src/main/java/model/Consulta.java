@@ -10,6 +10,8 @@ public class Consulta {
     private int idPaciente;
     private int idMedico;
     private Timestamp data;
+    private String motivoCancelamento;
+    private boolean cancelada;
 
     public Consulta(){
 
@@ -20,6 +22,24 @@ public class Consulta {
         this.idMedico = dto.getMedico().getId();
         this.idPaciente = dto.getPaciente().getId();
         this.data = dto.getData();
+        this.motivoCancelamento = "";
+        this.cancelada = false;
+    }
+
+    public String getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(String motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
+    }
+
+    public boolean isCancelada() {
+        return cancelada;
+    }
+
+    public void setCancelada(boolean cancelada) {
+        this.cancelada = cancelada;
     }
 
     public int getId() {

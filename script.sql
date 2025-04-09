@@ -35,5 +35,7 @@ CREATE TABLE consulta(
     id SERIAL PRIMARY KEY,
     medico_id INT NOT NULL,
     paciente_id INT NOT NULL,
-    data TIMESTAMP NOT NULL
+    data TIMESTAMP NOT NULL,
+    motivo_cancelamento TEXT,
+    cancelada boolean default false;
 );

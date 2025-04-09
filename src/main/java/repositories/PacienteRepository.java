@@ -73,18 +73,15 @@ public class PacienteRepository {
             connection = new ConnectionFactory().getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, paciente.getNome());
-            preparedStatement.setString(2, paciente.getEmail());
-            preparedStatement.setString(3, paciente.getTelefone());
-            preparedStatement.setString(4, paciente.getCpf());
-            preparedStatement.setString(5, paciente.getUfEndereco());
-            preparedStatement.setString(6, paciente.getCepEndereco());
-            preparedStatement.setString(7, paciente.getLogradouroEndereco());
-            preparedStatement.setLong(8, paciente.getNumeroEndereco());
-            preparedStatement.setString(9, paciente.getComplementoEndereco());
-            preparedStatement.setString(10, paciente.getBairroEndereco());
-            preparedStatement.setString(11, paciente.getCidadeEndereco());
-            preparedStatement.setBoolean(12, paciente.isAtivo());
-            preparedStatement.setInt(13, paciente.getId());
+            preparedStatement.setString(2, paciente.getTelefone());
+            preparedStatement.setString(3, paciente.getUfEndereco());
+            preparedStatement.setString(4, paciente.getCepEndereco());
+            preparedStatement.setString(5, paciente.getLogradouroEndereco());
+            preparedStatement.setLong(6, paciente.getNumeroEndereco());
+            preparedStatement.setString(7, paciente.getComplementoEndereco());
+            preparedStatement.setString(8, paciente.getBairroEndereco());
+            preparedStatement.setString(9, paciente.getCidadeEndereco());
+            preparedStatement.setInt(10, paciente.getId());
 
             preparedStatement.executeUpdate();
         } finally {

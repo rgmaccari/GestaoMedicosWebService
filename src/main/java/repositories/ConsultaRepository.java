@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultaRepository {
-    private static final String INSERT = "INSERT INTO consulta(medico_id, paciente_id, data) VALUES(?, ?, ?)";
+    private static final String INSERT = "INSERT INTO consulta(medico_id, paciente_id, data, motivo_cancelamento, cancelada) VALUES(?, ?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM consulta WHERE id = ?";
     private static final String FIND_ALL = "SELECT * FROM consulta";
 
@@ -27,6 +27,8 @@ public class ConsultaRepository {
             preparedStatement.setInt(1, consulta.getIdMedico());
             preparedStatement.setInt(2, consulta.getIdPaciente());
             preparedStatement.setTimestamp(3, consulta.getData());
+            preparedStatement.setString(4, "");
+            preparedStatement.setBoolean(5, false);
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -112,6 +114,33 @@ public class ConsultaRepository {
             }
         }
         return listaConsultas;
+    }
+
+    public Consulta findById(int id) throws SQLException, NamingException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Consulta consulta = null;
+
+        try{
+            connection = new ConnectionFactory().getConnection();
+            preparedStatement = connection.prepareStatement(FIND_ALL);
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                consulta = new Consulta();
+                consulta.setId(resultSet.getInt("id"));
+                consulta.setIdMedico(resultSet.getInt("medico_id"));
+                consulta.setIdPaciente(resultSet.getInt("paciente_id"));
+                consulta.setData(resultSet.getTimestamp("data"));
+                consulta.setMotivoCancelamento(resultSet.getString("motivo_cancelamento"));
+                consulta.setCancelada(resultSet.getBoolean("cancelada"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Erro ao buscar consultas: " + e.getMessage());
+        }
+        return consulta;
     }
 }
 
