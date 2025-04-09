@@ -35,7 +35,7 @@ public class MedicoRepository {
             "ativo = ? " +
             "WHERE id = ?";
 
-    private static final String DELETE_BY_ID = "DELETE FROM medico WHERE id = ?";
+    private static final String DELETE_BY_ID = "UPDATE medico SET ativo = false WHERE id = ?";
 
     private static final String FIND_ALL = "SELECT * FROM medico WHERE ativo = true ORDER BY nome ASC";
 

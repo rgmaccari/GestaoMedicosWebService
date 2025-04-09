@@ -1,5 +1,7 @@
 package interfaces;
 
+import dto.AtualizacaoMedicoDTO;
+import dto.ListaMedicosDTO;
 import model.Medico;
 import dto.DadosCadastroMedico;
 import exceptions.BusinessException;
@@ -14,7 +16,7 @@ public interface MedicoWS {
     Medico insert(DadosCadastroMedico medico) throws BusinessException;
 
     @WebMethod
-    Medico update(Medico medico) throws BusinessException;
+    Medico update(Integer id, AtualizacaoMedicoDTO dados) throws BusinessException;
 
     @WebMethod
     void delete(Integer id) throws BusinessException;
@@ -23,5 +25,5 @@ public interface MedicoWS {
     Medico findById(Integer id) throws BusinessException;
 
     @WebMethod
-    List<Medico> getAll() throws BusinessException;
+    List<ListaMedicosDTO> findAll() throws BusinessException;
 }

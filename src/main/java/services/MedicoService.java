@@ -1,5 +1,6 @@
 package services;
 
+import dto.AtualizacaoMedicoDTO;
 import dto.ListaMedicosDTO;
 import exceptions.BusinessException;
 import model.Medico;
@@ -28,7 +29,7 @@ public class MedicoService {
             throw new BusinessException("Os dados pessoais do médico estão incorretos.");
         }
 
-        if (!medico.getTelefone().matches("\\d{10,11}")) {
+        if(!medico.getTelefone().matches("\\d{10,11}")){
             throw new BusinessException("Telefone inválido.");
         }
 
@@ -41,7 +42,7 @@ public class MedicoService {
             throw new BusinessException("Os dados do endereço estão incorretos.");
         }
 
-        if (!medico.getUfEndereco().matches("[A-Z]{2}")) {
+        if(!medico.getUfEndereco().matches("[A-Z]{2}")){
             throw new BusinessException("UF inválida.");
         }
 
@@ -54,22 +55,49 @@ public class MedicoService {
 
     }
 
-    public Medico update(Medico medico) throws BusinessException {
-        if(medico.getId() == null){
+    public Medico update(Integer id, AtualizacaoMedicoDTO dados) throws BusinessException {
+        if (id == null) {
             throw new BusinessException("O id do médico é obrigatório.");
         }
 
-        if(medico.getNome() == null || medico.getNome().isEmpty() ||
-           medico.getTelefone() == null || medico.getTelefone().isEmpty()){
-            throw new BusinessException("Atualize os dados faltantes.");
+        if (dados.getNome() == null || dados.getNome().isEmpty()) {
+            throw new BusinessException("O nome é obrigatório.");
+        }
+        if (dados.getTelefone() == null || dados.getTelefone().isEmpty()) {
+            throw new BusinessException("O telefone é obrigatório.");
+        }
+        if (dados.getEndereco() != null) {
+            if (dados.getEndereco().getUf() == null || dados.getEndereco().getUf().isEmpty() ||
+                    dados.getEndereco().getCep() == null || dados.getEndereco().getCep().isEmpty() ||
+                    dados.getEndereco().getLogradouro() == null || dados.getEndereco().getLogradouro().isEmpty() ||
+                    dados.getEndereco().getBairro() == null || dados.getEndereco().getBairro().isEmpty() ||
+                    dados.getEndereco().getCidade() == null || dados.getEndereco().getCidade().isEmpty()) {
+                throw new BusinessException("Os dados do endereço estão incompletos.");
+            }
         }
 
-        try{
-            medicoRepository.update(medico);
-            return medico;
-        }catch (Exception e){
+        try {
+            Medico medicoAtual = medicoRepository.findById(id);
+            if (medicoAtual == null) {
+                throw new BusinessException("Médico não encontrado.");
+            }
+            medicoAtual.setNome(dados.getNome());
+            medicoAtual.setTelefone(dados.getTelefone());
+            if (dados.getEndereco() != null) {
+                medicoAtual.setUfEndereco(dados.getEndereco().getUf());
+                medicoAtual.setCepEndereco(dados.getEndereco().getCep());
+                medicoAtual.setLogradouroEndereco(dados.getEndereco().getLogradouro());
+                medicoAtual.setNumeroEndereco(dados.getEndereco().getNumero());
+                medicoAtual.setComplementoEndereco(dados.getEndereco().getComplemento());
+                medicoAtual.setBairroEndereco(dados.getEndereco().getBairro());
+                medicoAtual.setCidadeEndereco(dados.getEndereco().getCidade());
+            }
+
+            medicoRepository.update(medicoAtual);
+            return medicoAtual;
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
-            throw new BusinessException("Erro ao atualizar medico (service).");
+            throw new BusinessException("Erro ao atualizar médico (service).");
         }
     }
 

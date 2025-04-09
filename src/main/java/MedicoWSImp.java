@@ -1,7 +1,8 @@
+import dto.AtualizacaoMedicoDTO;
 import dto.DadosCadastroMedico;
+import dto.ListaMedicosDTO;
 import exceptions.BusinessException;
 import interfaces.MedicoWS;
-import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import model.Medico;
 import services.MedicoService;
@@ -19,9 +20,9 @@ public class MedicoWSImp implements MedicoWS {
     }
 
     @Override
-    public Medico update(Medico medico) throws BusinessException {
+    public Medico update(Integer id, AtualizacaoMedicoDTO dados) throws BusinessException {
         MedicoService service = new MedicoService();
-        return service.update(medico);
+        return service.update(id, dados);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class MedicoWSImp implements MedicoWS {
     }
 
     @Override
-    public List<Medico> getAll() throws BusinessException {
+    public List<ListaMedicosDTO> findAll() throws BusinessException {
         MedicoService service = new MedicoService();
         return service.findAll();
     }
