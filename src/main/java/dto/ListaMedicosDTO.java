@@ -3,10 +3,19 @@ package dto;
 import model.Especialidade;
 
 public class ListaMedicosDTO {
+    private int id;
     private String nome;
     private String email;
     private String crm;
     private Especialidade especialidade;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

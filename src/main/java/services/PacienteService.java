@@ -1,5 +1,6 @@
 package services;
 
+import dto.ListaPacientesDTO;
 import exceptions.BusinessException;
 import model.Paciente;
 import repositories.PacienteRepository;
@@ -35,7 +36,7 @@ public class PacienteService {
         }
 
     }
-    public Paciente update(Paciente paciente) throws BusinessException {
+    public Paciente update(Paciente paciente) throws BusinessException, SQLException, NamingException {
         if (paciente.getId() == null) {
             throw new BusinessException("O id do paciente é obrigatório.");
         }
@@ -44,6 +45,15 @@ public class PacienteService {
                 paciente.getTelefone() == null || paciente.getTelefone().isEmpty()) {
             throw new BusinessException("Atualize os dados faltantes.");
         }
+
+        Paciente pacienteAtual = pacienteRepository.findById(paciente.getId());
+        if (!pacienteAtual.getEmail().equals(paciente.getEmail())) {
+            throw new BusinessException("O e-mail não pode ser alterado.");
+        }
+        if (!pacienteAtual.getCpf().equals(paciente.getCpf())) {
+            throw new BusinessException("O CPF não pode ser alterado.");
+        }
+
         try {
             pacienteRepository.update(paciente);
             return paciente;
@@ -53,7 +63,7 @@ public class PacienteService {
         }
     }
 
-    public List<Paciente> findAll() throws BusinessException {
+    public List<ListaPacientesDTO> findAll() throws BusinessException {
         try {
             return pacienteRepository.findAll();
         } catch (NamingException | SQLException e) {

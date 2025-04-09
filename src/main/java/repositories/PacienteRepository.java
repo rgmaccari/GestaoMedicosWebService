@@ -1,6 +1,7 @@
 package repositories;
 
 import Infrastructure.ConnectionFactory;
+import dto.ListaPacientesDTO;
 import model.Paciente;
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -14,15 +15,17 @@ public class PacienteRepository {
 
     private static final String INSERT =
             "INSERT INTO paciente (nome, email, telefone, cpf, ufEndereco, cepEndereco, " +
-                    "logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco, cidadeEndereco) " +
+                    "logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco, cidadeEndereco, ativo) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE =
-            "UPDATE paciente SET nome = ?, email = ?, telefone = ?, cpf = ?, ufEndereco = ?, cepEndereco = ?, " +
-                    "logradouroEndereco = ?, numeroEndereco = ?, complementoEndereco = ?, bairroEndereco = ?, cidadeEndereco = ?, ativo = ? " +
-                    "WHERE id = ?";
-    private static final String DELETE_BY_ID = "DELETE FROM paciente WHERE id = ?";
 
-    private static final String FIND_ALL = "SELECT * FROM paciente";
+    private static final String UPDATE =
+            "UPDATE paciente SET nome = ?, telefone = ?, ufEndereco = ?, cepEndereco = ?, " +
+                    "logradouroEndereco = ?, numeroEndereco = ?, complementoEndereco = ?, bairroEndereco = ?, cidadeEndereco = ? " +
+                    "WHERE id = ?";
+
+    private static final String DELETE_BY_ID = "UPDATE paciente SET ativo = false WHERE id = ?";
+
+    private static final String FIND_ALL = "SELECT * FROM paciente WHERE ativo = true ORDER BY nome ASC";
 
     private static final String FIND_BY_ID = "SELECT * FROM paciente WHERE id = ?";
 
@@ -45,6 +48,7 @@ public class PacienteRepository {
             preparedStatement.setString(9, paciente.getComplementoEndereco());
             preparedStatement.setString(10, paciente.getBairroEndereco());
             preparedStatement.setString(11, paciente.getCidadeEndereco());
+            preparedStatement.setBoolean(12, true);
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -59,6 +63,7 @@ public class PacienteRepository {
         }
         return paciente;
     }
+
 
     public void update(Paciente paciente) throws SQLException, NamingException {
         Connection connection = null;
@@ -88,6 +93,7 @@ public class PacienteRepository {
         }
     }
 
+
     public void delete(Integer id) throws SQLException, NamingException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -102,8 +108,8 @@ public class PacienteRepository {
         }
     }
 
-    public List<Paciente> findAll() throws SQLException, NamingException {
-        List<Paciente> pacientes = new ArrayList<>();
+    public List<ListaPacientesDTO> findAll() throws SQLException, NamingException {
+        List<ListaPacientesDTO> pacientes = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -114,19 +120,11 @@ public class PacienteRepository {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Paciente paciente = new Paciente();
+                ListaPacientesDTO paciente = new ListaPacientesDTO();
                 paciente.setId(resultSet.getInt("id"));
                 paciente.setNome(resultSet.getString("nome"));
                 paciente.setEmail(resultSet.getString("email"));
-                paciente.setTelefone(resultSet.getString("telefone"));
                 paciente.setCpf(resultSet.getString("cpf"));
-                paciente.setUfEndereco(resultSet.getString("ufEndereco"));
-                paciente.setCepEndereco(resultSet.getString("cepEndereco"));
-                paciente.setLogradouroEndereco(resultSet.getString("logradouroEndereco"));
-                paciente.setNumeroEndereco(resultSet.getLong("numeroEndereco"));
-                paciente.setComplementoEndereco(resultSet.getString("complementoEndereco"));
-                paciente.setBairroEndereco(resultSet.getString("bairroEndereco"));
-                paciente.setCidadeEndereco(resultSet.getString("cidadeEndereco"));
                 paciente.setAtivo(resultSet.getBoolean("ativo"));
 
                 pacientes.add(paciente);
@@ -139,6 +137,7 @@ public class PacienteRepository {
 
         return pacientes;
     }
+
 
     public Paciente findById(Integer id) throws SQLException, NamingException {
         Paciente paciente = null;
