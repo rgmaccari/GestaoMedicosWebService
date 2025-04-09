@@ -8,12 +8,12 @@ public class Medico {
     private String nome;
     private String email;
     private String telefone;
-    private String crm;
+    private long crm;
     private Especialidade especialidade;
     private String ufEndereco;
     private String cepEndereco;
     private String logradouroEndereco;
-    private String numeroEndereco;
+    private Long numeroEndereco;
     private String complementoEndereco;
     private String bairroEndereco;
     private String cidadeEndereco;
@@ -69,11 +69,11 @@ public class Medico {
         this.telefone = telefone;
     }
 
-    public String getCrm() {
+    public Long getCrm() {
         return crm;
     }
 
-    public void setCrm(String crm) {
+    public void setCrm(Long crm) {
         this.crm = crm;
     }
 
@@ -117,11 +117,11 @@ public class Medico {
         this.logradouroEndereco = logradouroEndereco;
     }
 
-    public String getNumeroEndereco() {
+    public Long getNumeroEndereco() {
         return numeroEndereco;
     }
 
-    public void setNumeroEndereco(String numeroEndereco) {
+    public void setNumeroEndereco(Long numeroEndereco) {
         this.numeroEndereco = numeroEndereco;
     }
 

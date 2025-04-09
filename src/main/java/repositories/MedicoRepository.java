@@ -52,12 +52,12 @@ public class MedicoRepository {
             preparedStatement.setString(1, medico.getNome());
             preparedStatement.setString(2, medico.getEmail());
             preparedStatement.setString(3, medico.getTelefone());
-            preparedStatement.setString(4, medico.getCrm());
+            preparedStatement.setLong(4, medico.getCrm());
             preparedStatement.setString(5, medico.getEspecialidade().toString());
             preparedStatement.setString(6, medico.getUfEndereco());
             preparedStatement.setString(7, medico.getCepEndereco());
             preparedStatement.setString(8, medico.getLogradouroEndereco());
-            preparedStatement.setString(9, medico.getNumeroEndereco());
+            preparedStatement.setLong(9, medico.getNumeroEndereco());
             preparedStatement.setString(10, medico.getComplementoEndereco());
             preparedStatement.setString(11, medico.getBairroEndereco());
             preparedStatement.setString(12, medico.getCidadeEndereco());
@@ -94,16 +94,17 @@ public class MedicoRepository {
             preparedStatement.setString(1, medico.getNome());
             preparedStatement.setString(2, medico.getEmail());
             preparedStatement.setString(3, medico.getTelefone());
-            preparedStatement.setString(4, medico.getCrm());
+            preparedStatement.setLong(4, medico.getCrm());
             preparedStatement.setString(5, medico.getEspecialidade().toString());
             preparedStatement.setString(6, medico.getUfEndereco());
             preparedStatement.setString(7,medico.getCepEndereco());
             preparedStatement.setString(8, medico.getLogradouroEndereco());
-            preparedStatement.setString(9, medico.getNumeroEndereco());
+            preparedStatement.setLong(9, medico.getNumeroEndereco());
             preparedStatement.setString(10, medico.getComplementoEndereco());
             preparedStatement.setString(11, medico.getBairroEndereco());
             preparedStatement.setString(12, medico.getCidadeEndereco());
-
+            preparedStatement.setBoolean(13, medico.isAtivo());
+            preparedStatement.setInt(14, medico.getId());
 
         }finally{
             if(preparedStatement != null)
@@ -131,12 +132,12 @@ public class MedicoRepository {
                 medico.setNome(resultSet.getString("nome"));
                 medico.setEmail(resultSet.getString("email"));
                 medico.setTelefone(resultSet.getString("telefone"));
-                medico.setCrm(resultSet.getString("crm"));
+                medico.setCrm(resultSet.getLong("crm"));
                 medico.setEspecialidade(Especialidade.valueOf(resultSet.getString("especialidade").toUpperCase()));
                 medico.setUfEndereco(resultSet.getString("ufEndereco"));
                 medico.setCepEndereco(resultSet.getString("cepEndereco"));
                 medico.setLogradouroEndereco(resultSet.getString("logradouroEndereco"));
-                medico.setNumeroEndereco(resultSet.getString("numeroEndereco"));
+                medico.setNumeroEndereco(resultSet.getLong("numeroEndereco"));
                 medico.setComplementoEndereco(resultSet.getString("complementoEndereco"));
                 medico.setBairroEndereco(resultSet.getString("bairroEndereco"));
                 medico.setCidadeEndereco(resultSet.getString("cidadeEndereco"));
@@ -188,19 +189,19 @@ public class MedicoRepository {
             preparedStatement = connection.prepareStatement(FIND_BY_ID);
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 medico = new Medico();
 
                 medico.setId(resultSet.getInt("id"));
                 medico.setNome(resultSet.getString("nome"));
                 medico.setEmail(resultSet.getString("email"));
                 medico.setTelefone(resultSet.getString("telefone"));
-                medico.setCrm(resultSet.getString("crm"));
+                medico.setCrm(resultSet.getLong("crm"));
                 medico.setEspecialidade(Especialidade.valueOf(resultSet.getString("especialidade").toUpperCase()));
                 medico.setUfEndereco(resultSet.getString("ufEndereco"));
                 medico.setCepEndereco(resultSet.getString("cepEndereco"));
                 medico.setLogradouroEndereco(resultSet.getString("logradouroEndereco"));
-                medico.setNumeroEndereco(resultSet.getString("numeroEndereco"));
+                medico.setNumeroEndereco(resultSet.getLong("numeroEndereco"));
                 medico.setComplementoEndereco(resultSet.getString("complementoEndereco"));
                 medico.setBairroEndereco(resultSet.getString("bairroEndereco"));
                 medico.setCidadeEndereco(resultSet.getString("cidadeEndereco"));

@@ -41,7 +41,7 @@ public class PacienteRepository {
             preparedStatement.setString(5, paciente.getUfEndereco());
             preparedStatement.setString(6, paciente.getCepEndereco());
             preparedStatement.setString(7, paciente.getLogradouroEndereco());
-            preparedStatement.setString(8, paciente.getNumeroEndereco());
+            preparedStatement.setLong(8, paciente.getNumeroEndereco());
             preparedStatement.setString(9, paciente.getComplementoEndereco());
             preparedStatement.setString(10, paciente.getBairroEndereco());
             preparedStatement.setString(11, paciente.getCidadeEndereco());
@@ -74,7 +74,7 @@ public class PacienteRepository {
             preparedStatement.setString(5, paciente.getUfEndereco());
             preparedStatement.setString(6, paciente.getCepEndereco());
             preparedStatement.setString(7, paciente.getLogradouroEndereco());
-            preparedStatement.setString(8, paciente.getNumeroEndereco());
+            preparedStatement.setLong(8, paciente.getNumeroEndereco());
             preparedStatement.setString(9, paciente.getComplementoEndereco());
             preparedStatement.setString(10, paciente.getBairroEndereco());
             preparedStatement.setString(11, paciente.getCidadeEndereco());
@@ -123,13 +123,13 @@ public class PacienteRepository {
                 paciente.setUfEndereco(resultSet.getString("ufEndereco"));
                 paciente.setCepEndereco(resultSet.getString("cepEndereco"));
                 paciente.setLogradouroEndereco(resultSet.getString("logradouroEndereco"));
-                paciente.setNumeroEndereco(resultSet.getString("numeroEndereco"));
+                paciente.setNumeroEndereco(resultSet.getLong("numeroEndereco"));
                 paciente.setComplementoEndereco(resultSet.getString("complementoEndereco"));
                 paciente.setBairroEndereco(resultSet.getString("bairroEndereco"));
                 paciente.setCidadeEndereco(resultSet.getString("cidadeEndereco"));
                 paciente.setAtivo(resultSet.getBoolean("ativo"));
 
-                paciente.add(paciente);
+                pacientes.add(paciente);
             }
         } finally {
             if (resultSet != null) resultSet.close();
@@ -162,7 +162,7 @@ public class PacienteRepository {
                 paciente.setUfEndereco(resultSet.getString("ufEndereco"));
                 paciente.setCepEndereco(resultSet.getString("cepEndereco"));
                 paciente.setLogradouroEndereco(resultSet.getString("logradouroEndereco"));
-                paciente.setNumeroEndereco(resultSet.getString("numeroEndereco"));
+                paciente.setNumeroEndereco(resultSet.getLong("numeroEndereco"));
                 paciente.setComplementoEndereco(resultSet.getString("complementoEndereco"));
                 paciente.setBairroEndereco(resultSet.getString("bairroEndereco"));
                 paciente.setCidadeEndereco(resultSet.getString("cidadeEndereco"));

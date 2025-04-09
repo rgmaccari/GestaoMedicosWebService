@@ -12,7 +12,7 @@ public class Paciente {
     private String ufEndereco;
     private String cepEndereco;
     private String logradouroEndereco;
-    private String numeroEndereco;
+    private Long numeroEndereco;
     private String complementoEndereco;
     private String bairroEndereco;
     private String cidadeEndereco;
@@ -88,10 +88,10 @@ public class Paciente {
         public void setLogradouroEndereco(String logradouroEndereco) {
             this.logradouroEndereco = logradouroEndereco;
         }
-        public String getNumeroEndereco() {
+        public Long getNumeroEndereco() {
             return numeroEndereco;
         }
-        public void setNumeroEndereco(String numeroEndereco) {
+        public void setNumeroEndereco(Long numeroEndereco) {
             this.numeroEndereco = numeroEndereco;
         }
         public String getComplementoEndereco() {

@@ -11,11 +11,16 @@ import java.util.List;
 public class MedicoService {
     private MedicoRepository medicoRepository;
 
+    public MedicoService(){
+        medicoRepository = new MedicoRepository();
+    }
+
     public Medico insert(Medico medico) throws BusinessException {
+
         if(medico.getNome() == null || medico.getNome().isEmpty() ||
             medico.getEmail() == null || medico.getEmail().isEmpty() ||
             medico.getTelefone() == null || medico.getTelefone().isEmpty() ||
-            medico.getCrm() == null || medico.getCrm().isEmpty() ||
+            medico.getCrm() == null ||
             medico.getEspecialidade() == null){
 
             throw new BusinessException("Os dados pessoais do médico estão incorretos.");

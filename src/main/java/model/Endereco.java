@@ -4,7 +4,7 @@ public class Endereco {
     private String uf;
     private String cep;
     private String logradouro;
-    private String numero;
+    private Long numero;
     private String complemento;
     private String bairro;
     private String cidade;
@@ -33,11 +33,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 
