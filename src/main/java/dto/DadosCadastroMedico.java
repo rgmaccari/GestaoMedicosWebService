@@ -7,7 +7,7 @@ public class DadosCadastroMedico {
     private String nome;
     private String email;
     private String telefone;
-    private Long crm;
+    private String crm;
     private Especialidade especialidade;
     private Endereco endereco;
     private boolean ativo;
@@ -36,11 +36,11 @@ public class DadosCadastroMedico {
         this.telefone = telefone;
     }
 
-    public Long getCrm() {
+    public String getCrm() {
         return crm;
     }
 
-    public void setCrm(Long crm) {
+    public void setCrm(String crm) {
         this.crm = crm;
     }
 

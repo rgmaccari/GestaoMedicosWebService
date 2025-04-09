@@ -15,8 +15,8 @@ import java.util.List;
 public class MedicoRepository {
     private static final String INSERT =
             "INSERT INTO medico (nome, email, telefone, crm, especialidade, ufEndereco, cepEndereco, " +
-            "logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco, cidadeEndereco) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco, cidadeEndereco, ativo) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE =
             "UPDATE medico SET " +
@@ -37,7 +37,7 @@ public class MedicoRepository {
 
     private static final String DELETE_BY_ID = "DELETE FROM medico WHERE id = ?";
 
-    private static final String FIND_ALL = "SELECT * FROM medico";
+    private static final String FIND_ALL = "SELECT * FROM medico WHERE ativo = true ORDER BY nome ASC";
 
     private static final String FIND_BY_ID = "SELECT * FROM medico WHERE id = ?";
 
@@ -52,7 +52,7 @@ public class MedicoRepository {
             preparedStatement.setString(1, medico.getNome());
             preparedStatement.setString(2, medico.getEmail());
             preparedStatement.setString(3, medico.getTelefone());
-            preparedStatement.setLong(4, medico.getCrm());
+            preparedStatement.setString(4, medico.getCrm());
             preparedStatement.setString(5, medico.getEspecialidade().toString());
             preparedStatement.setString(6, medico.getUfEndereco());
             preparedStatement.setString(7, medico.getCepEndereco());
@@ -61,6 +61,7 @@ public class MedicoRepository {
             preparedStatement.setString(10, medico.getComplementoEndereco());
             preparedStatement.setString(11, medico.getBairroEndereco());
             preparedStatement.setString(12, medico.getCidadeEndereco());
+            preparedStatement.setBoolean(13, true);
 
             preparedStatement.executeUpdate();
 
@@ -94,7 +95,7 @@ public class MedicoRepository {
             preparedStatement.setString(1, medico.getNome());
             preparedStatement.setString(2, medico.getEmail());
             preparedStatement.setString(3, medico.getTelefone());
-            preparedStatement.setLong(4, medico.getCrm());
+            preparedStatement.setString(4, medico.getCrm());
             preparedStatement.setString(5, medico.getEspecialidade().toString());
             preparedStatement.setString(6, medico.getUfEndereco());
             preparedStatement.setString(7,medico.getCepEndereco());
@@ -132,7 +133,7 @@ public class MedicoRepository {
                 medico.setNome(resultSet.getString("nome"));
                 medico.setEmail(resultSet.getString("email"));
                 medico.setTelefone(resultSet.getString("telefone"));
-                medico.setCrm(resultSet.getLong("crm"));
+                medico.setCrm(resultSet.getString("crm"));
                 medico.setEspecialidade(Especialidade.valueOf(resultSet.getString("especialidade").toUpperCase()));
                 medico.setUfEndereco(resultSet.getString("ufEndereco"));
                 medico.setCepEndereco(resultSet.getString("cepEndereco"));
@@ -196,7 +197,7 @@ public class MedicoRepository {
                 medico.setNome(resultSet.getString("nome"));
                 medico.setEmail(resultSet.getString("email"));
                 medico.setTelefone(resultSet.getString("telefone"));
-                medico.setCrm(resultSet.getLong("crm"));
+                medico.setCrm(resultSet.getString("crm"));
                 medico.setEspecialidade(Especialidade.valueOf(resultSet.getString("especialidade").toUpperCase()));
                 medico.setUfEndereco(resultSet.getString("ufEndereco"));
                 medico.setCepEndereco(resultSet.getString("cepEndereco"));

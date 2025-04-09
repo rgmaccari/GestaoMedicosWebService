@@ -23,7 +23,7 @@ public class ConsultaRepository {
 
         try{
             connection = new ConnectionFactory().getConnection();
-            preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement = connection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, consulta.getIdMedico());
             preparedStatement.setInt(2, consulta.getIdPaciente());
             preparedStatement.setTimestamp(3, consulta.getData());

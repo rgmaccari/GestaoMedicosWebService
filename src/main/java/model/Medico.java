@@ -8,7 +8,7 @@ public class Medico {
     private String nome;
     private String email;
     private String telefone;
-    private long crm;
+    private String crm;
     private Especialidade especialidade;
     private String ufEndereco;
     private String cepEndereco;
@@ -69,11 +69,11 @@ public class Medico {
         this.telefone = telefone;
     }
 
-    public Long getCrm() {
+    public String getCrm() {
         return crm;
     }
 
-    public void setCrm(Long crm) {
+    public void setCrm(String crm) {
         this.crm = crm;
     }
 
@@ -149,17 +149,3 @@ public class Medico {
         this.cidadeEndereco = cidadeEndereco;
     }
 }
-
-/**
- * RQF-001 Cadastro de médicos
- * O sistema deve possuir uma funcionalidade de cadastro de médicos, na qual as
- * seguintes informações deverão ser preenchidas:
- * Nome
- * E-mail
- * Telefone
- * CRM
- * Especialidade (Ortopedia, Cardiologia, Ginecologia ou Dermatologia)
- * Endereço completo (logradouro, número, complemento, bairro)
- * Todas as informações são de preenchimento obrigatório, exceto o número e o
- * complemento do endereço.
- * */

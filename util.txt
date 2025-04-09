@@ -58,3 +58,45 @@ Anotações principais:
 
 @WebService: utilizada em MedicoWSImp (Interface) para
 
+
+Detalhes sobre a construção:
+
+Model: recebe um DTO no construtor, possui getters e setters. Não recebe um objeto diretamente.
+DTO: não possui construtor, apenas getters e setters. Recebe o objeto diretamente.
+
+Repository:
+    - Possui "private static final String" como forma de declarar diretamente a SQL. Recebe "(?)" como parâmetros.
+    - Sempre que necessário utilizar uma Query, fazer:
+        - Iniciar Connection que recebe o getConnection de uma nova ConnectionFactory;
+        - Iniciar PreparedStatement recebendo a Connection e passando a consulta SQL;
+        - Iniciar o ResultSet recebendo um execute update PreparedStatement (como se estivesse contando as linhas);
+
+        - Em qualquer método:
+            - Inicializar essas 3 "conexões" (exceto no delete, que não precisa do resultSet).
+            - Jogar à SQLException;
+            - Englobar tudo em um Try/Catch/Finally;
+            - Sempre fechar as conexões no finally;
+            - preparedStatement.set para setar um dado (passar o índice e o dado);
+            - resultSet.getInt para retornar um valor de uma coluna (passando o nome da coluna ou o índice).
+
+
+Service:
+    - Declarar um Repository no início da classe;
+    - Se achar necessário criar um construtor sem parâmetros que inicializa um novo Repository;
+    - Criar os mesmos métodos do Repository, passando ou não um parâmetro;
+    - Iniciar um try/catch, definir a chamada do Respository no try (com ou sem retorno);
+
+
+
+Interface:
+    - Inserir anotação @WebService;
+    - Em cada método (os mesmos das classes anteriores), inserir a anotação @WebMethod;
+    - Apenas declarar o método, seus retornos ou parâmetros jogando à exceções.
+
+
+WSImp:
+    - Definir com anotação @WebService e um endpoint (".interfaces/ExemploWS");
+    - Implementar os métodos faltantes;
+    - Criar um objeto do Service;
+    - Se necessário, criar um objeto a ser acessado ou manipulado;
+    - Chamar o método da operação no Service.
