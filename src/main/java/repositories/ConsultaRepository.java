@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ConsultaRepository {
     private static final String INSERT = "INSERT INTO consulta(medico_id, paciente_id, data, motivo_cancelamento, cancelada) VALUES(?, ?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM consulta WHERE id = ?";
+    private static final String DELETE = "UPDATE consulta SET cancelada = true, motivo_cancelamento = ? WHERE id = ?";
     private static final String FIND_ALL = "SELECT * FROM consulta";
 
     public Consulta insert(Consulta consulta) throws SQLException, NamingException {
@@ -52,14 +52,15 @@ public class ConsultaRepository {
         return consulta;
     }
 
-    public void delete(int id) throws SQLException, NamingException {
+    public void delete(int id, String motivo) throws SQLException, NamingException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
             connection = new ConnectionFactory().getConnection();
             preparedStatement = connection.prepareStatement(DELETE);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, motivo);
+            preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
 
         }catch (SQLException e){

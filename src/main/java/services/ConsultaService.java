@@ -20,6 +20,8 @@ public class ConsultaService {
 
     public ConsultaService() {
         this.consultaRepository = new ConsultaRepository();
+        this.pacienteRepository = new PacienteRepository();
+        this.medicoRepository = new MedicoRepository();
     }
 
     public Consulta insert(Consulta consulta) throws BusinessException, NamingException {
@@ -58,7 +60,7 @@ public class ConsultaService {
             consulta.setMotivoCancelamento(motivo);
             consulta.setCancelada(true);
 
-            consultaRepository.delete(id);
+            consultaRepository.delete(id, motivo);
         }catch(Exception e){
             e.printStackTrace();
             throw new BusinessException("Erro ao deletar consulta (service): " + e.getMessage());

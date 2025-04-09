@@ -19,5 +19,5 @@ public interface ConsultaWS {
     List<Consulta> findAll() throws BusinessException, NamingException;
 
     @WebMethod
-    void delete(int id) throws BusinessException, NamingException;
+    void delete(int id, String motivo) throws BusinessException, NamingException;
 }

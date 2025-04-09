@@ -68,13 +68,3 @@ public class DadosCadastroMedico {
         this.ativo = ativo;
     }
 }
-
-/**
- * private int id;
- *     private String nome;
- *     private String email;
- *     private String telefone;
- *     private String crm;
- *     private Especialidade especialidade;
- *     private Endereco endereco;
- *     private boolean ativo;*/

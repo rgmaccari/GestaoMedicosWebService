@@ -6,4 +6,3 @@ public enum Especialidade {
     GINECOLOGIA,
     DERMATOLOGIA;
 }
-//Ortopedia, Cardiologia, Ginecologia ou Dermatologia

@@ -13,7 +13,7 @@ import java.util.List;
 public class ConsultaWSImp implements ConsultaWS {
     @Override
     public Consulta insert(ConsultaDTO dto) throws BusinessException, NamingException {
-        Consulta consulta = new Consulta();
+        Consulta consulta = new Consulta(dto);
         ConsultaService consultaService = new ConsultaService();
         return consultaService.insert(consulta);
     }
@@ -25,8 +25,8 @@ public class ConsultaWSImp implements ConsultaWS {
     }
 
     @Override
-    public void delete(int id) throws BusinessException, NamingException {
+    public void delete(int id, String motivo) throws BusinessException, NamingException {
         ConsultaService consultaService = new ConsultaService();
-        consultaService.delete(id);
+        consultaService.delete(id, motivo);
     }
 }

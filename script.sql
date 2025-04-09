@@ -25,7 +25,7 @@ CREATE TABLE paciente(
     uf_endereco CHAR(2) NOT NULL,
     cep_endereco VARCHAR(8) NOT NULL,
     logradouro_endereco VARCHAR(100) NOT NULL,
-    numero_endereco BIGINT NOT NULL,
+    numero_endereco BIGINT,
     complemento_endereco VARCHAR(50),
     bairro_endereco VARCHAR(50) NOT NULL,
     cidade_endereco VARCHAR(50) NOT NULL
