@@ -1,10 +1,13 @@
 import dto.DadosCadastroPaciente;
+import dto.ListaPacientesDTO;
 import exceptions.BusinessException;
 import interfaces.PacienteWS;
 import jakarta.jws.WebService;
 import model.Paciente;
 import services.PacienteService;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebService(endpointInterface = "interfaces.PacienteWS")
@@ -17,7 +20,7 @@ public class PacienteWSImp implements PacienteWS {
         return pacienteService.insert(paciente);
     }
     @Override
-    public List<Paciente> listarTodos() throws BusinessException {
+    public List<ListaPacientesDTO> listarTodos() throws BusinessException {
         return pacienteService.findAll();
     }
     @Override
@@ -25,7 +28,7 @@ public class PacienteWSImp implements PacienteWS {
         return pacienteService.findById(id);
     }
     @Override
-    public Paciente atualizar(Paciente paciente) throws BusinessException {
+    public Paciente atualizar(Paciente paciente) throws BusinessException, SQLException, NamingException {
         return pacienteService.update(paciente);
     }
 

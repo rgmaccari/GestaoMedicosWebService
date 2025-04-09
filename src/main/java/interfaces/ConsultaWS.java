@@ -7,6 +7,7 @@ import jakarta.jws.WebService;
 import model.Consulta;
 
 import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebService
@@ -19,5 +20,5 @@ public interface ConsultaWS {
     List<Consulta> findAll() throws BusinessException, NamingException;
 
     @WebMethod
-    void delete(int id, String motivo) throws BusinessException, NamingException;
+    void delete(int id, String motivo) throws BusinessException, NamingException, SQLException;
 }

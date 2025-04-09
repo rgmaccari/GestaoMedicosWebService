@@ -6,6 +6,7 @@ import model.Consulta;
 import services.ConsultaService;
 
 import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ConsultaWSImp implements ConsultaWS {
     }
 
     @Override
-    public void delete(int id, String motivo) throws BusinessException, NamingException {
+    public void delete(int id, String motivo) throws BusinessException, NamingException, SQLException{
         ConsultaService consultaService = new ConsultaService();
         consultaService.delete(id, motivo);
     }
